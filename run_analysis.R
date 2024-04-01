@@ -50,13 +50,9 @@ colnames(juntosAtividades)[1] <- "Activity"
 activity_lables[,2]<-as.character(activity_lables[,2])
 
 #4.2 - Replace the number of activities by is description
-juntosAtividades[, 1] <- merge(
-  data.frame(V1 = juntosAtividades[, 1]), 
-  activity_lables, 
-  by.x = "V1", 
-  by.y = "V1", 
-  all.x = TRUE
-)$V2
+for (i in 1:length(juntosAtividades[, 1])) {
+  juntosAtividades[i, 1] <- activity_lables[juntosAtividades[i, 1], 2]
+}
 
 # 5- From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
@@ -70,5 +66,7 @@ colnames(Todos)[1] <- "Subject"
 Tidy <- Todos %>%
   group_by(Subject, Activity) %>%
   summarise_all(mean)
+#write.table(Todos, file = "Todos.txt", row.names = FALSE)
+
 # 5.5- Export the final table
 write.table(Tidy, file = "FinalData.txt", row.names = FALSE)
