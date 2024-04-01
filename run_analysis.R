@@ -1,5 +1,5 @@
 # Check if packages are installed, if not, install them    
-if (!require(lubridate)) install.packages("lubridate")
+if (!require(lubridate)) install.packages("lubridate") 
 if (!require(data.table)) install.packages("data.table")
 if (!require(dplyr)) install.packages("dplyr")
 
@@ -71,4 +71,4 @@ Tidy <- Todos %>%
   group_by(Subject, Activity) %>%
   summarise_all(mean)
 # 5.5- Export the final table
-write.table(Tidy, file = "FinalData.txt", row.names = TRUE)
+write.table(Tidy, file = "FinalData.txt", row.names = FALSE)
